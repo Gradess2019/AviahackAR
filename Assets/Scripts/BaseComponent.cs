@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class BaseComponent : MonoBehaviour
 {
-    private string tag;
-    public string GetTag(){return tag;}
-
-    //protected State currentState;
+    protected State currentState;
 
     void Start()
     {

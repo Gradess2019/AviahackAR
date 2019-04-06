@@ -13,6 +13,34 @@ public class HatchAction : Command
     }
     public override void Execute()
     {
-        throw new System.NotImplementedException();
+        IHatchController[] objects = null;
+        if (objectsTags.Length > 0)
+        {
+            foreach (string currentTag in objectsTags)
+            {
+                objects = (GameObject.FindGameObjectsWithTag(currentTag)).Cast<IHatchController>().ToArray();
+                SetupHatch(objects);
+            }
+        }
+        else
+        {
+            objects = (FindObjectsOfType<MonoBehaviour>().OfType<IHatchController>()).ToArray();
+            SetupHatch(objects);
+        }
+    }
+
+    private void SetupHatch(IHatchController[] objects)
+    {
+        foreach (IHatchController currentObject in objects)
+        {
+            if (hatchOpen)
+            {
+                currentObject.HatchOpen();
+            }
+            else
+            {
+                currentObject.HatchClose();
+            }
+        }
     }
 }
