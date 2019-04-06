@@ -9,7 +9,7 @@ public class TurnLightAction : Command
     public TurnLightAction(string[] constructorArgs)
     {
         turnOn = constructorArgs[0].Equals("1");
-        objectTags = constructorArgs.Where(arg => arg != constructorArgs[0]).ToArray();
+        objectsTags = constructorArgs.Where(arg => arg != constructorArgs[0]).ToArray();
     }
 
     public override void Execute()

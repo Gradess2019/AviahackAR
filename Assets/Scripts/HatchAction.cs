@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class HatchAction : Command
 {
@@ -8,7 +9,7 @@ public class HatchAction : Command
     public HatchAction(string[] constructorArgs)
     {
         hatchOpen = constructorArgs[0].Equals("1");
-        objectTags = constructorArgs.Where(arg => arg != constructorArgs[0]).ToArray();
+        objectsTags = constructorArgs.Where(arg => arg != constructorArgs[0]).ToArray();
     }
     public override void Execute()
     {
