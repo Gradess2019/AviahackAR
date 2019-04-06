@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseRoom : MonoBehaviour , ILightSwitcher
+public class BaseRoom : BaseComponent , ILightSwitcher
 {
     public void LightOn()
     {
@@ -12,15 +12,5 @@ public class BaseRoom : MonoBehaviour , ILightSwitcher
     public void LightOff()
     {
 
-    }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
     }
 }
