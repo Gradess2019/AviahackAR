@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class Parser
 {
-    public Command ParseToCommand(string commandName, params string[] constructorArgs)
+    public Command ParseToCommand(int operation)
     {
-        if (constructorArgs.Length > 0)
-        {   
-            if (commandName.Equals("TurnLightAction"))
+        switch (operation)
+        {
+            case 1:
             {
-                return new TurnLightAction(constructorArgs);
-            } else if (commandName.Equals("HatchAction"))
-            {
-                return new HatchAction(constructorArgs);
+                return new TurnLightAction();
             }
-        }   
-        
-        return null;
+
+            case 2:
+            {
+                return new HatchAction();
+            }
+
+            default:
+            {
+                return null;
+            }
+        }
     }
 }

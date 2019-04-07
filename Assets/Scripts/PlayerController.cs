@@ -6,9 +6,16 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
+
     public void DoAction(Command cmd)
     {
         cmd.Execute();
+    }
+
+    void Start()
+    {
+        gameObject.AddComponent<TCPServer>();
+        
     }
 
     void Update()
@@ -16,6 +23,7 @@ public class PlayerController : MonoBehaviour
         string[] args = {"1"};
         Command turnLight = new TurnLightAction(args);
         DoAction(turnLight);
+
 
         // GameObject obj = null;
 

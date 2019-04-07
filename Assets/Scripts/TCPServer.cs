@@ -5,32 +5,43 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System;
+using System.Threading;
 
 public class TCPServer : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private const int port = 8888;
+    private TcpListener server;
+    private TcpClient client;
+    private Thread serverThread;
     void Start()
     {
-        Main();
+        serverThread = new Thread( new ThreadStart(WaitingForRequest));
+        serverThread.IsBackground = true;
+        serverThread.Start();
     }
+     
+     public bool IsRUnfdsd = false;
 
-    private static void Main()
+    private void WaitingForRequest()
     {
-        TcpListener server = null;
         try
         {
-            IPAddress localhost = IPAddress.Parse("127.0.0.1");
-            server = new TcpListener(localhost, port);
-
+            server = new TcpListener(IPAddress.Parse("127.0.0.1"), 2565);
             server.Start();
+
+            Debug.Log(IsRUnfdsd);
+
 
             while (true)
             {
                 Debug.Log("Waiting for connection");
+                IsRUnfdsd = true;
 
-                TcpClient client = server.AcceptTcpClient();
+                Debug.Log(IsRUnfdsd);
+
+
+                client = server.AcceptTcpClient();
                 Debug.Log("Client connected");
 
                 NetworkStream stream = client.GetStream();
@@ -39,23 +50,19 @@ public class TCPServer : MonoBehaviour
                 int bytesRead;
                 while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                 {
-                    File.WriteAllBytes("abd.json", buffer);
+                    File.WriteAllBytes("abd.txt", buffer);
                 }
                 Debug.Log("Yeah!!!");
 
-                stream.Close();
+                string input = File.ReadAllText();
 
-                client.Close();
+                Parser parser = new Parser();
+                Command command = parser.ParseToCommand(Int32.Parse(input));
             }
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
-        }
-        finally
-        {
-            if (server != null)
-                server.Stop();
+            Debug.Log(e.ToString());
         }
     }
 
