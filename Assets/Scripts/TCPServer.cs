@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Net;
+using System.Net.Sockets;
+using System.IO;
+using System;
 
 public class TCPServer : MonoBehaviour
 {
@@ -12,7 +16,7 @@ public class TCPServer : MonoBehaviour
         Main();
     }
 
-    private static void Main(string[] args)
+    private static void Main()
     {
         TcpListener server = null;
         try
