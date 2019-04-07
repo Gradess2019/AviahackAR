@@ -10,4 +10,9 @@ public abstract class State : MonoBehaviour
     {
         gameObject.GetComponent<Renderer>().material.color = stateColor;
     }
+
+    public Color GetStateColor()
+    {
+        return stateColor;
+    }
 }

@@ -7,7 +7,7 @@ public class BaseComponent : MonoBehaviour
 {
     protected State currentState;
 
-    void Start()
+    protected virtual void Start()
     {
         currentState = gameObject.AddComponent<WorkingState>();
         Invoke("Exec", 0.5f);
@@ -16,6 +16,16 @@ public class BaseComponent : MonoBehaviour
     public void Exec()
     {
         currentState.SetStateColor(gameObject);
+    }
+
+    public void SetState(State newState)
+    {
+        currentState = newState;
+    }
+
+    public State GetState()
+    {
+        return currentState;
     }
 
 }

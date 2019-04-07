@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class BaseRoom : BaseComponent , ILightSwitcher
 {
+    private Light lightComponent;
+
+    protected override void Start()
+    {
+        base.Start();
+        lightComponent = GetComponent<Light>();
+        lightComponent.enabled = false;
+    }
     public void LightOn()
     {
-
+        lightComponent.color = currentState.GetStateColor();
+        lightComponent.enabled = true;
     }
 
     public void LightOff()
     {
+        lightComponent.enabled = false;
+    }
 
+    public bool IsTurnOn()
+    {
+        return lightComponent.enabled;
     }
 }
