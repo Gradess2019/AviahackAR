@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("BLYAAAAAAAAAAA");
-
             BaseComponent[] baseComponents = (FindObjectsOfType<MonoBehaviour>().OfType<BaseComponent>()).ToArray();
             foreach (BaseComponent currentComponent in baseComponents)
             {

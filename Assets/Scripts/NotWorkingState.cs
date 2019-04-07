@@ -4,4 +4,8 @@ using UnityEngine;
 
 public class NotWorkingState : State
 {
+    void Start()
+    {
+        stateColor = Color.yellow;
+    }
 }

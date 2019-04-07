@@ -4,11 +4,10 @@ using UnityEngine;
 
 public abstract class State : MonoBehaviour
 {
-    [SerializeField]
-    protected Material stateMaterial;
+    protected Color stateColor;
 
-    public void SetStateMaterial(Renderer renderer)
+    public void SetStateColor(GameObject gameObject)
     {
-        renderer.material = stateMaterial;
+        gameObject.GetComponent<Renderer>().material.color = stateColor;
     }
 }

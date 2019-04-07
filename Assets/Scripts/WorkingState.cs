@@ -4,4 +4,8 @@ using UnityEngine;
 
 public class WorkingState : State 
 {   
+    void Start()
+    {
+        stateColor = Color.green;
+    }
 }

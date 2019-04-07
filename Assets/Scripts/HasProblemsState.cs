@@ -4,4 +4,8 @@ using UnityEngine;
 
 public class HasProblemsState : State
 {
+    void Start()
+    {
+        stateColor = Color.red;
+    }
 }
