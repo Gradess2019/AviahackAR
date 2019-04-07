@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -10,18 +11,30 @@ public class Menu : MonoBehaviour
     private BaseComponent[] rooms;
     private BaseComponent selectedBaseComponent;
 
+    [SerializeField]
+    private Text lightText;
+
+    [SerializeField]
+    private Text hatchText;
+
     void Start()
     {
+        currentIndex = 0;
         rooms = FindObjectsOfType<BaseComponent>();
+        if (rooms.Length > 0)
+        {
+            selectedBaseComponent = rooms[0];
+        }
     }
 
     public void GoLeft()
     {
-        if(currentIndex==0)
+        if (currentIndex == 0)
         {
-            selectedBaseComponent = rooms[MAXSIZE-1];
+            selectedBaseComponent = rooms[MAXSIZE - 1];
+            currentIndex = MAXSIZE - 1;
         }
-        else 
+        else
         {
             selectedBaseComponent = rooms[currentIndex--];
         }
@@ -30,19 +43,37 @@ public class Menu : MonoBehaviour
 
     private void ShowComponentData()
     {
-        //selectedBaseComponent
+        if (selectedBaseComponent is ILightSwitcher)
+        {
+            lightText.gameObject.SetActive(true);
+        }
+        else
+        {
+            lightText.gameObject.SetActive(false);
+        }
+
+        if (selectedBaseComponent is IHatchController)
+        {
+            hatchText.gameObject.SetActive(true);
+        }
+        else
+        {
+            hatchText.gameObject.SetActive(false);
+        }
     }
 
 
     public void GoRight()
     {
-        if(currentIndex==MAXSIZE-1)
+        if (currentIndex == MAXSIZE - 1)
         {
             selectedBaseComponent = rooms[0];
+            currentIndex = 0;
         }
-        else 
+        else
         {
-            selectedBaseComponent = rooms[currentIndex++];
+            selectedBaseComponent = rooms[++currentIndex];
+
         }
         ShowComponentData();
     }

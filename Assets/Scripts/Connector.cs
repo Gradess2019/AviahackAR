@@ -5,16 +5,18 @@ using UnityEngine;
 public class Connector : BaseRoom, IHatchController
 {
     private bool isClosed;
+
+    private Vector3 STEP = new Vector3(0f, 2f, 0f);
     public void TurnHatch()
     {
         if (isClosed)
         {
             isClosed = false;
-            transform.localScale += new Vector3(0.1f, 0, 0);
+            transform.localScale += STEP;
         } else 
         {
             isClosed = true;
-            transform.localScale -= new Vector3(0.1f, 0, 0);
+            transform.localScale -= STEP;
         }
     }
 }

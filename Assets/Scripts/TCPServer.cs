@@ -40,11 +40,8 @@ public class TCPServer : MonoBehaviour
     {
         try
         {
-            server = new TcpListener(IPAddress.Parse("127.0.0.1"), 2565);
+            server = new TcpListener(IPAddress.Parse("172.31.179.162"), 2565);
             server.Start();
-
-            Debug.Log(IsRUnfdsd);
-
 
             while (true)
             {

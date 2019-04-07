@@ -6,18 +6,27 @@ using System;
 
 public class PlayerController : MonoBehaviour, ICommandReceiver
 {
+    [SerializeField]
     private Menu menu;
     private TCPServer server;
     void Start()
     {
         server = gameObject.AddComponent<TCPServer>();
         server.SetCommandReceiver(this);
-        Invoke("SetupServer", 1);
+        Invoke("SetupServer", 2);
     }
 
     private void SetupServer()
     {
         server.StartTCPServer();
+        DoAction(1);
+        DoAction(3);
+        DoAction(1);
+        DoAction(3);
+        DoAction(1);
+        DoAction(3);
+        DoAction(1);
+        DoAction(3);
     }
 
     public void DoAction(int operation)
@@ -26,8 +35,10 @@ public class PlayerController : MonoBehaviour, ICommandReceiver
         {
             case 1:
                 {
+                    print(menu.GetSelectedComponent());
                     menu.GoRight();
-                    Debug.Log("go right");
+                    // Debug.Log("go right");
+                    
                     break;
                 }
 
