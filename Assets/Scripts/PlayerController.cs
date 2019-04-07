@@ -6,30 +6,18 @@ using System;
 
 public class PlayerController : MonoBehaviour, ICommandReceiver
 {
+    private Menu menu;
+    private TCPServer server;
     void Start()
     {
-        TCPServer server = gameObject.AddComponent<TCPServer>();
+        server = gameObject.AddComponent<TCPServer>();
         server.SetCommandReceiver(this);
-        server.StartTCPServer();
+        Invoke("SetupServer", 1);
     }
 
-    private void GetNextState(BaseComponent currentComponent)
+    private void SetupServer()
     {
-        State currentState = currentComponent.GetState();
-        if (currentState is WorkingState)
-        {
-            currentComponent.SetState(currentComponent.gameObject.AddComponent<HasProblemsState>());
-        }
-        else if (currentState is HasProblemsState)
-        {
-            currentComponent.SetState(currentComponent.gameObject.AddComponent<NotWorkingState>());
-        }
-        else
-        {
-            currentComponent.SetState(currentComponent.gameObject.AddComponent<WorkingState>());
-        }
-
-        Destroy(currentState);
+        server.StartTCPServer();
     }
 
     public void DoAction(int operation)
@@ -37,17 +25,59 @@ public class PlayerController : MonoBehaviour, ICommandReceiver
         switch (operation)
         {
             case 1:
-            {
-
-                break;
-            }
+                {
+                    menu.GoRight();
+                    Debug.Log("go right");
+                    break;
+                }
 
             case 2:
-            {
-                
-                break;
-            }
+                {
+                    SwitchLight();
+                    Debug.Log("switch light");
+                    break;
+                }
+
+            case 3:
+                {
+                    SwitchHatch();
+                    Debug.Log("switch hatch");
+                    break;
+                }
+
+            case 4:
+                {
+                    Debug.Log("change opacity");
+                    //opacity
+                    break;
+                }
+
+            case 5:
+                {
+                    menu.GoLeft();
+                    Debug.Log("go left");
+                    break;
+                }
         }
     }
-    
+
+    private void SwitchLight()
+    {
+        BaseComponent currentComponent = menu.GetSelectedComponent();
+        if (currentComponent is ILightSwitcher)
+        {
+            ILightSwitcher lightSwitcher = currentComponent as ILightSwitcher;
+            lightSwitcher.TurnLight();
+        }
+    }
+
+    private void SwitchHatch()
+    {
+        BaseComponent currentComponent = menu.GetSelectedComponent();
+        if (currentComponent is IHatchController)
+        {
+            IHatchController lightSwitcher = currentComponent as IHatchController;
+            lightSwitcher.TurnHatch();
+        }
+    }
 }

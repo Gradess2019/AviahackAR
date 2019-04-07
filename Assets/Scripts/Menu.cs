@@ -7,29 +7,49 @@ public class Menu : MonoBehaviour
     private const int MAXSIZE = 4;
 
     private int currentIndex;
-    public BaseComponent[] rooms;
-    public BaseComponent SelectedBaseComponent;
+    private BaseComponent[] rooms;
+    private BaseComponent selectedBaseComponent;
 
     void Start()
     {
         rooms = FindObjectsOfType<BaseComponent>();
-
     }
 
     public void GoLeft()
     {
         if(currentIndex==0)
-        SelectedBaseComponent = BaseComponent[MAXSIZE-1];
+        {
+            selectedBaseComponent = rooms[MAXSIZE-1];
+        }
         else 
-        SelectedBaseComponent = BaseComponent[currentIndex--];
+        {
+            selectedBaseComponent = rooms[currentIndex--];
+        }
+        ShowComponentData();
     }
+
+    private void ShowComponentData()
+    {
+        //selectedBaseComponent
+    }
+
 
     public void GoRight()
     {
         if(currentIndex==MAXSIZE-1)
-        SelectedBaseComponent = BaseComponent[0];
+        {
+            selectedBaseComponent = rooms[0];
+        }
         else 
-        SelectedBaseComponent = BaseComponent[currentIndex++];
+        {
+            selectedBaseComponent = rooms[currentIndex++];
+        }
+        ShowComponentData();
+    }
+
+    public BaseComponent GetSelectedComponent()
+    {
+        return selectedBaseComponent;
     }
 
 }

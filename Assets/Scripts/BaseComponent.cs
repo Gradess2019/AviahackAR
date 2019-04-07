@@ -6,12 +6,25 @@ using UnityEditor;
 public class BaseComponent : MonoBehaviour
 {
     protected State currentState;
+    protected string name;
 
     protected virtual void Start()
     {
         currentState = gameObject.AddComponent<WorkingState>();
         Invoke("Exec", 0.5f);
     }
+    
+    public string GetName()
+    {
+        return name;
+    }
+
+    public void SetName(string newName)
+    {
+        name = newName;
+    }
+
+
 
     public void Exec()
     {
