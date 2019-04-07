@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class Parser
 {
-    public Command ParseToCommand(int operation)
-    {
-        switch (operation)
-        {
-            case 1:
-            {
-                return new TurnLightAction();
-            }
+    // public Command ParseToCommand(int operation)
+    // {
+    //     switch (operation)
+    //     {
+    //         case 1:
+    //         {
+    //             return new TurnLightAction();
+    //         }
 
-            case 2:
-            {
-                return new HatchAction();
-            }
+    //         case 2:
+    //         {
+    //             return new HatchAction();
+    //         }
 
-            default:
-            {
-                return null;
-            }
-        }
-    }
+    //         default:
+    //         {
+    //             return null;
+    //         }
+    //     }
+    // }
 }

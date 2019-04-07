@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Connector : BaseRoom, IHatchController
 {
-    public void HatchOpen () 
-    {
-
-    }
-
-    public void HatchClose () 
+    public void TurnHatch()
     {
         
     }

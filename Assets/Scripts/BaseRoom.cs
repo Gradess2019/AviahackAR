@@ -18,13 +18,8 @@ public class BaseRoom : BaseComponent , ILightSwitcher
         lightComponent.enabled = true;
     }
 
-    public void LightOff()
+    public void TurnLight()
     {
-        lightComponent.enabled = false;
-    }
-
-    public bool IsTurnOn()
-    {
-        return lightComponent.enabled;
+        lightComponent.enabled = !lightComponent.enabled;
     }
 }

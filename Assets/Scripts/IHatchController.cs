@@ -4,8 +4,6 @@ using UnityEngine;
 
 public interface IHatchController
 {
-    void HatchOpen();
-
-    void HatchClose();
+    void TurnHatch();
 
 }

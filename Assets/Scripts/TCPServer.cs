@@ -14,16 +14,29 @@ public class TCPServer : MonoBehaviour
     private TcpListener server;
     private TcpClient client;
     private Thread serverThread;
+
+    private ICommandReceiver commandReceiver;
+
+    private const string FILE_NAME = "abd.txt";
     void Start()
     {
         serverThread = new Thread( new ThreadStart(WaitingForRequest));
         serverThread.IsBackground = true;
-        serverThread.Start();
     }
      
-     public bool IsRUnfdsd = false;
+    public bool IsRUnfdsd = false;
 
-    private void WaitingForRequest()
+    public void StartTCPServer()
+    {
+        serverThread.Start();
+    }
+
+    public void SetCommandReceiver(ICommandReceiver newReceiver)
+    {
+        commandReceiver = newReceiver;
+    }
+
+    public void WaitingForRequest()
     {
         try
         {
@@ -50,14 +63,15 @@ public class TCPServer : MonoBehaviour
                 int bytesRead;
                 while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) > 0)
                 {
-                    File.WriteAllBytes("abd.txt", buffer);
+                    File.WriteAllBytes(FILE_NAME, buffer);
                 }
                 Debug.Log("Yeah!!!");
 
-                string input = File.ReadAllText();
+                string input = File.ReadAllText(FILE_NAME);
 
-                Parser parser = new Parser();
-                Command command = parser.ParseToCommand(Int32.Parse(input));
+                // Parser parser = new Parser();
+                // Command command = parser.ParseToCommand(Int32.Parse(input));
+                commandReceiver.DoAction(Int32.Parse(input));
             }
         }
         catch (Exception e)

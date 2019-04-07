@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public abstract class Command : MonoBehaviour
+public interface ICommandReceiver
 {
-    public abstract void Execute();
-
+    void DoAction(int operation);
 }

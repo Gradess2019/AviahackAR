@@ -4,8 +4,6 @@ using UnityEngine;
 
 public interface ILightSwitcher
 {
-    void LightOn();
-
-    void LightOff();
+    void TurnLight();
 
 }
