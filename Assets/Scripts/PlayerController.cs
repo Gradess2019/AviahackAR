@@ -20,13 +20,15 @@ public class PlayerController : MonoBehaviour, ICommandReceiver
     {
         server.StartTCPServer();
         DoAction(1);
+        DoAction(2);
         DoAction(3);
-        DoAction(1);
-        DoAction(3);
-        DoAction(1);
-        DoAction(3);
-        DoAction(1);
-        DoAction(3);
+        DoAction(4);
+        DoAction(5);
+    }
+
+    IEnumerator YopTvoyMat()
+    {
+        yield return new WaitForSeconds(1);
     }
 
     public void DoAction(int operation)
